@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "package": "protosky.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ChunkStatusMixin",
+    "ChunkGeneratorMixin",
+    "EnderDragonFightMixin",
+    "ProtoChunkAccessor",
+    "StructurePieceAccessor",
+    "StructureHelperInvokers.ChunkGeneratorInvoker",
+    "StructureHelperInvokers.IglooGeneratorPieceInvoker",
+    "StructureHelperInvokers.ShiftableStructurePieceInvoker",
+    "StructureHelperInvokers.ShipwreckGeneratorPieceInvoker",
+    "StructureHelperInvokers.SimpleStructurePieceInvoker",
+    "StructureHelperInvokers.StructurePieceInvoker",
+    "StructureHelperInvokers.StructureStartInvoker",
+    "StructureHelperInvokers.OceanRuinGeneratorPieceInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
