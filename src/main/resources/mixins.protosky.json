@@ -15,7 +15,8 @@
     "StructureHelperInvokers.SimpleStructurePieceInvoker",
     "StructureHelperInvokers.StructurePieceInvoker",
     "StructureHelperInvokers.StructureStartInvoker",
-    "StructureHelperInvokers.OceanRuinGeneratorPieceInvoker"
+    "StructureHelperInvokers.OceanRuinGeneratorPieceInvoker",
+    "structures.NetherFossilGeneratorPieceMixin"
   ],
   "injectors": {
     "defaultRequire": 1

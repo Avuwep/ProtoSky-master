@@ -1,13 +1,11 @@
 package protosky.mixins;
 
-import it.unimi.dsi.fastutil.ints.IntArraySet;
-import it.unimi.dsi.fastutil.ints.IntSet;
+
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
 import net.minecraft.SharedConstants;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.crash.CrashReportSection;
@@ -68,7 +66,7 @@ public abstract class ChunkGeneratorMixin {
     public void generateFeatures(StructureWorldAccess world, Chunk chunk, StructureAccessor structureAccessor) {
         ChunkPos chunkPos = chunk.getPos();
         //for testing
-        System.out.println("Generating features!");
+//        System.out.println("Generating features!");
         if (!SharedConstants.isOutsideGenerationArea(chunkPos)) {
             ChunkSectionPos chunkSectionPos = ChunkSectionPos.from(chunkPos, world.getBottomSectionCoord());
             BlockPos blockPos = chunkSectionPos.getMinPos();
@@ -132,48 +130,48 @@ public abstract class ChunkGeneratorMixin {
                     }
 
                     if (k < i) {
-                        IntSet intSet = new IntArraySet();
-                        var20 = set.iterator();
-
-                        while(var20.hasNext()) {
-                            RegistryEntry<Biome> registryEntry = (RegistryEntry)var20.next();
-                            List<RegistryEntryList<PlacedFeature>> list3 = ((GenerationSettings)this.generationSettingsGetter.apply(registryEntry)).getFeatures();
-                            if (k < list3.size()) {
-                                RegistryEntryList<PlacedFeature> registryEntryList = (RegistryEntryList)list3.get(k);
-                                PlacedFeatureIndexer.IndexedFeatures indexedFeatures = (PlacedFeatureIndexer.IndexedFeatures)list.get(k);
-                                registryEntryList.stream().map(RegistryEntry::value).forEach((placedFeaturex) -> {
-                                    //Commenting out this line prevents features from being added to a list of things to be generated, effectively preventing them from generating
-                                    //intSet.add(indexedFeatures.indexMapping().applyAsInt(placedFeaturex));
-                                });
-                            }
-                        }
-
-                        int n = intSet.size();
-                        int[] is = intSet.toIntArray();
-                        Arrays.sort(is);
-                        PlacedFeatureIndexer.IndexedFeatures indexedFeatures2 = (PlacedFeatureIndexer.IndexedFeatures)list.get(k);
-
-                        for(int o = 0; o < n; ++o) {
-                            int p = is[o];
-                            PlacedFeature placedFeature = (PlacedFeature)indexedFeatures2.features().get(p);
-                            Supplier<String> supplier2 = () -> {
-                                Optional var10001 = registry2.getKey(placedFeature).map(Object::toString);
-                                Objects.requireNonNull(placedFeature);
-                                return (String)var10001.orElseGet(placedFeature::toString);
-                            };
-                            chunkRandom.setDecoratorSeed(l, p, k);
-
-                            try {
-                                world.setCurrentlyGeneratingStructureName(supplier2);
-                                placedFeature.generate(world, (ChunkGenerator)(Object) this, chunkRandom, blockPos);
-                            } catch (Exception var30) {
-                                CrashReport crashReport2 = CrashReport.create(var30, "Feature placement");
-                                var10000 = crashReport2.addElement("Feature");
-                                Objects.requireNonNull(supplier2);
-                                var10000.add("Description", supplier2::get);
-                                throw new CrashException(crashReport2);
-                            }
-                        }
+//                        IntSet intSet = new IntArraySet();
+//                        var20 = set.iterator();
+//
+//                        while(var20.hasNext()) {
+//                            RegistryEntry<Biome> registryEntry = (RegistryEntry)var20.next();
+//                            List<RegistryEntryList<PlacedFeature>> list3 = ((GenerationSettings)this.generationSettingsGetter.apply(registryEntry)).getFeatures();
+//                            if (k < list3.size()) {
+//                                RegistryEntryList<PlacedFeature> registryEntryList = (RegistryEntryList)list3.get(k);
+//                                PlacedFeatureIndexer.IndexedFeatures indexedFeatures = (PlacedFeatureIndexer.IndexedFeatures)list.get(k);
+//                                registryEntryList.stream().map(RegistryEntry::value).forEach((placedFeaturex) -> {
+//                                    //Commenting out this line prevents features from being added to a list of things to be generated, effectively preventing them from generating
+//                                    //intSet.add(indexedFeatures.indexMapping().applyAsInt(placedFeaturex));
+//                                });
+//                            }
+//                        }
+//
+//                        int n = intSet.size();
+//                        int[] is = intSet.toIntArray();
+//                        Arrays.sort(is);
+//                        PlacedFeatureIndexer.IndexedFeatures indexedFeatures2 = (PlacedFeatureIndexer.IndexedFeatures)list.get(k);
+//
+//                        for(int o = 0; o < n; ++o) {
+//                            int p = is[o];
+//                            PlacedFeature placedFeature = (PlacedFeature)indexedFeatures2.features().get(p);
+//                            Supplier<String> supplier2 = () -> {
+//                                Optional var10001 = registry2.getKey(placedFeature).map(Object::toString);
+//                                Objects.requireNonNull(placedFeature);
+//                                return (String)var10001.orElseGet(placedFeature::toString);
+//                            };
+//                            chunkRandom.setDecoratorSeed(l, p, k);
+//
+//                            try {
+//                                world.setCurrentlyGeneratingStructureName(supplier2);
+//                                placedFeature.generate(world, (ChunkGenerator)(Object) this, chunkRandom, blockPos);
+//                            } catch (Exception var30) {
+//                                CrashReport crashReport2 = CrashReport.create(var30, "Feature placement");
+//                                var10000 = crashReport2.addElement("Feature");
+//                                Objects.requireNonNull(supplier2);
+//                                var10000.add("Description", supplier2::get);
+//                                throw new CrashException(crashReport2);
+//                            }
+//                        }
                     }
                 }
 

@@ -100,12 +100,12 @@ public class StructureHelper {
             Registry<Structure> structureRegistry = world.getRegistryManager().get(RegistryKeys.STRUCTURE);
 
             structures.clear();
-//            structures.add(new MutablePair<>(
-//                    structureRegistry.get(Identifier.tryParse("end_city")),
-//                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, blockPos2, chunk) -> {
-//                        return true;
-//                    })
-//            );
+            structures.add(new MutablePair<>(
+                    structureRegistry.get(Identifier.tryParse("end_city")),
+                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, blockPos2, chunk) -> {
+                        return true;
+                    })
+            );
             structures.add(new MutablePair<>(
                     structureRegistry.get(Identifier.tryParse("stronghold")),
                     (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, blockPos2, chunk) -> {
@@ -132,192 +132,192 @@ public class StructureHelper {
                     })
             );
             //Structure Move handlers
-//            structures.add(new MutablePair<>(
-//                    structureRegistry.get(Identifier.tryParse("swamp_hut")),
-//                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, blockPos2, chunk) -> {
-//                        if(structurePiece instanceof ShiftableStructurePiece) {
-//                            SwampHutGenerator This = ((SwampHutGenerator)(Object)structurePiece);
-//                            ShiftableStructurePieceInvoker shiftableStructurePieceInvoker = ((ShiftableStructurePieceInvoker) This);
-//                            shiftableStructurePieceInvoker.invokeAdjustToAverageHeight(worldAccess, chunkBox, 0);
-//                        }
-//                        return false;
-//                    })
-//            );
-//            structures.add(new MutablePair<>(
-//                    structureRegistry.get(Identifier.tryParse("jungle_pyramid")),
-//                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, blockPos2, chunk) -> {
-//                        if(structurePiece instanceof ShiftableStructurePiece) {
-//                            JungleTempleGenerator This = ((JungleTempleGenerator)(Object)structurePiece);
-//                            ShiftableStructurePieceInvoker shiftableStructurePieceInvoker = ((ShiftableStructurePieceInvoker) This);
-//                            shiftableStructurePieceInvoker.invokeAdjustToAverageHeight(worldAccess, chunkBox, 0);
-//                        }
-//                        return false;
-//                    })
-//            );
-//            structures.add(new MutablePair<>(
-//                    structureRegistry.get(Identifier.tryParse("desert_pyramid")),
-//                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, blockPos2, chunk) -> {
-//                        if(structurePiece instanceof ShiftableStructurePiece) {
-//                            DesertTempleGenerator This = ((DesertTempleGenerator)(Object)structurePiece);
-//                            ShiftableStructurePieceInvoker shiftableStructurePieceInvoker = ((ShiftableStructurePieceInvoker) This);
-//                            shiftableStructurePieceInvoker.invokeAdjustToMinHeight(worldAccess, -random.nextInt(3));
-//                        }
-//                        return false;
-//                    })
-//            );
-//            structures.add(new MutablePair<>(
-//                    structureRegistry.get(Identifier.tryParse("igloo")),
-//                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot, chunk) -> {
-//                        SimpleStructurePieceInvoker simplePieceInvoker = ((SimpleStructurePieceInvoker) structurePiece);
-//                        IglooGeneratorPieceInvoker iglooGeneratorPieceInvoker = ((IglooGeneratorPieceInvoker) structurePiece);
-//                        StructurePieceInvoker pieceInvoker = (StructurePieceInvoker) structurePiece;
-//
-//
-//                        final Identifier TOP_TEMPLATE = new Identifier("igloo/top");
-//                        final Identifier MIDDLE_TEMPLATE = new Identifier("igloo/middle");
-//                        final Identifier BOTTOM_TEMPLATE = new Identifier("igloo/bottom");
-//                        final Map<Identifier, BlockPos> OFFSETS_FROM_TOP = ImmutableMap.of(
-//                                TOP_TEMPLATE, BlockPos.ORIGIN, MIDDLE_TEMPLATE, new BlockPos(2, -3, 4), BOTTOM_TEMPLATE, new BlockPos(0, -3, -2)
-//                        );
-//
-//                        Identifier identifier = new Identifier(simplePieceInvoker.getTemplateIdString());
-//                        StructurePlacementData structurePlacementData = iglooGeneratorPieceInvoker.invokeCreatePlacementData(simplePieceInvoker.getPlacementData().getRotation(), identifier);
-//
-//                        BlockPos blockPos = OFFSETS_FROM_TOP.get(identifier);
-//                        BlockPos blockPos2 = simplePieceInvoker.getPos().add(StructureTemplate.transform(structurePlacementData, new BlockPos(3 - blockPos.getX(), 0, -blockPos.getZ())));
-//
-//                        int i = worldAccess.getTopY(Heightmap.Type.WORLD_SURFACE_WG, blockPos2.getX(), blockPos2.getZ());
-//                        BlockPos posCache = simplePieceInvoker.getPos();
-//
-//                        simplePieceInvoker.setPos(simplePieceInvoker.getPos().add(0, i - 90 - 1, 0));
-//
-//                        simplePieceInvoker.getPlacementData().setBoundingBox(chunkBox);
-//                        pieceInvoker.setBoundingBox(simplePieceInvoker.getTemplate().calculateBoundingBox(simplePieceInvoker.getPlacementData(), simplePieceInvoker.getPos()));
-//
-//                        if (identifier.equals(TOP_TEMPLATE)) {
-//                            BlockPos blockPos4 = simplePieceInvoker.getPos().add(StructureTemplate.transform(structurePlacementData, new BlockPos(3, 0, 5)));
-//                        }
-//
-//                        simplePieceInvoker.setPos(posCache);
-//
-//                        //return true;
-//                        return false;
-//                    })
-//            );
-//            //FIX: Some structures don't work. See locations.txt
-//            structures.add(new MutablePair<>(
-//                    structureRegistry.get(Identifier.tryParse("shipwreck")),
-//                    //This is looks different than the original, but all that happened to it is it was restructured and named.
-//                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot, chunk) -> {
-//                        SimpleStructurePieceInvoker simplePieceInvoker = ((SimpleStructurePieceInvoker) structurePiece);
-//                        ShipwreckGeneratorPieceInvoker iglooGeneratorPieceInvoker = ((ShipwreckGeneratorPieceInvoker) structurePiece);
-//                        StructurePieceInvoker pieceInvoker = (StructurePieceInvoker) structurePiece;
-//
-//                        Heightmap.Type heightmap = iglooGeneratorPieceInvoker.getGrounded() ? Heightmap.Type.WORLD_SURFACE_WG : Heightmap.Type.OCEAN_FLOOR_WG;
-//
-//                        Vec3i size = simplePieceInvoker.getTemplate().getSize();
-//                        int area2D = size.getX() * size.getZ();
-//                        int YtoMoveTo = 0;
-//
-//                        //Beached Shipwrecks
-//                        if(iglooGeneratorPieceInvoker.getGrounded()) {
-//                            //This moves it down to the minium height of the world heightmap.
-//                            int minimumHeight = worldAccess.getTopY();
-//                            //Run through the 2D locations of the structure and get the average of their heightmaps
-//                            BlockPos otherBottomCorner = simplePieceInvoker.getPos().add(size.getX() - 1, 0, size.getZ() - 1);
-//                            //Run through the 2D locations of the structure and get the average of their heightmaps
-//                            for (BlockPos bottomLayerBlock : BlockPos.iterate(simplePieceInvoker.getPos(), otherBottomCorner)) {
-//                                minimumHeight = Math.min(minimumHeight, worldAccess.getTopY(heightmap, bottomLayerBlock.getX(), bottomLayerBlock.getZ()));
-//                            }
-//                             YtoMoveTo = minimumHeight - size.getY() / 2 - random.nextInt(3);
-//
-//                        //Normal shipwrecks
-//                        } else {
-//                            //Basically this just averages all the heights of ocean floor heightmap and puts it there.
-//                            int accumulatedHeight = 0;
-//                            //Run through the 2D locations of the structure and get the average of their heightmaps
-//                            BlockPos otherBottomCorner = simplePieceInvoker.getPos().add(size.getX() - 1, 0, size.getZ() - 1);
-//                            //Run through the 2D locations of the structure and get the average of their heightmaps
-//                            for (BlockPos bottomLayerBlock : BlockPos.iterate(simplePieceInvoker.getPos(), otherBottomCorner)) {
-//                                accumulatedHeight += worldAccess.getTopY(heightmap, bottomLayerBlock.getX(), bottomLayerBlock.getZ());
-//                            }
-//                            YtoMoveTo = accumulatedHeight / area2D;
-//                        }
-//
-//                        simplePieceInvoker.setPos(new BlockPos(simplePieceInvoker.getPos().getX(), YtoMoveTo, simplePieceInvoker.getPos().getZ()));
-//                        //super.generate(world, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot);
-//                        simplePieceInvoker.getPlacementData().setBoundingBox(chunkBox);
-//                        pieceInvoker.setBoundingBox(simplePieceInvoker.getTemplate().calculateBoundingBox(simplePieceInvoker.getPlacementData(), simplePieceInvoker.getPos()));
-//
-//                        return false;
-//                    })
-//            );
-//            structures.add(new MutablePair<>(
-//                    structureRegistry.get(Identifier.tryParse("shipwreck_beached")),
-//                    structures.get(structures.size() - 1).getRight())
-//            );
-//            structures.add(new MutablePair<>(
-//                    structureRegistry.get(Identifier.tryParse("ocean_ruin_cold")),
-//                    //This is looks different than the original, but all that happened to it is it was restructured and named.
-//                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot, chunk) -> {
-//                        SimpleStructurePieceInvoker simplePieceInvoker = ((SimpleStructurePieceInvoker) structurePiece);
-//                        OceanRuinGeneratorPieceInvoker oceanRuinGeneratorPieceInvoker = ((OceanRuinGeneratorPieceInvoker) structurePiece);
-//                        StructurePieceInvoker pieceInvoker = (StructurePieceInvoker) structurePiece;
-//
-//                        simplePieceInvoker.getPlacementData()
-//                                .clearProcessors()
-//                                .addProcessor(new BlockRotStructureProcessor(oceanRuinGeneratorPieceInvoker.getIntegrity()))
-//                                .addProcessor(BlockIgnoreStructureProcessor.IGNORE_AIR_AND_STRUCTURE_BLOCKS);
-//
-//                        int yToMoveTo = 0;
-//
-//                        int i = worldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, simplePieceInvoker.getPos().getX(), simplePieceInvoker.getPos().getZ());
-//                        simplePieceInvoker.setPos(new BlockPos(simplePieceInvoker.getPos().getX(), i, simplePieceInvoker.getPos().getZ()));
-//
-//                        BlockPos otherCorner = StructureTemplate.transformAround(
-//                                        new BlockPos(simplePieceInvoker.getTemplate().getSize().getX() - 1, 0, simplePieceInvoker.getTemplate().getSize().getZ() - 1),
-//                                        BlockMirror.NONE,
-//                                        simplePieceInvoker.getPlacementData().getRotation(),
-//                                        BlockPos.ORIGIN
-//                        ).add(simplePieceInvoker.getPos());
-//
-//                        //yToMoveTo = oceanRuinGeneratorPieceInvoker.method_14829Invoker(simplePieceInvoker.getPos(), worldAccess, otherCorner);
-//                        yToMoveTo = oceanRuinYCalculator(simplePieceInvoker.getPos(), worldAccess, otherCorner);
-//
-//                        simplePieceInvoker.setPos(new BlockPos(simplePieceInvoker.getPos().getX(), yToMoveTo, simplePieceInvoker.getPos().getZ()));
-//                        simplePieceInvoker.getPlacementData().setBoundingBox(chunkBox);
-//                        pieceInvoker.setBoundingBox(simplePieceInvoker.getTemplate().calculateBoundingBox(simplePieceInvoker.getPlacementData(), simplePieceInvoker.getPos()));
-//                        return false;
-//                    })
-//            );
-//            structures.add(new MutablePair<>(
-//                    structureRegistry.get(Identifier.tryParse("ocean_ruin_warm")),
-//                    structures.get(structures.size() - 1).getRight())
-//            );
-//            structures.add(new MutablePair<>(
-//                    structureRegistry.get(Identifier.tryParse("buried_treasure")),
-//                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot, chunk) -> {
-//                        StructurePieceInvoker pieceInvoker = (StructurePieceInvoker) structurePiece;
-//
-//                        int i = worldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, pieceInvoker.getBoundingBox().getMinX(), pieceInvoker.getBoundingBox().getMinZ());
-//                        BlockPos.Mutable mutable = new BlockPos.Mutable(pieceInvoker.getBoundingBox().getMinX(), i, pieceInvoker.getBoundingBox().getMinZ());
-//
-//                        while(mutable.getY() > worldAccess.getBottomY()) {
-//                            BlockState blockState2 = worldAccess.getBlockState(mutable.down());
-//                            if (blockState2 == Blocks.SANDSTONE.getDefaultState()
-//                                    || blockState2 == Blocks.STONE.getDefaultState()
-//                                    || blockState2 == Blocks.ANDESITE.getDefaultState()
-//                                    || blockState2 == Blocks.GRANITE.getDefaultState()
-//                                    || blockState2 == Blocks.DIORITE.getDefaultState()) {
-//                                break;
-//                            }
-//
-//                            mutable.move(0, -1, 0);
-//                        }
-//                        pieceInvoker.setBoundingBox(new BlockBox(mutable));
-//                        return false;
-//                    })
-//            );
+            structures.add(new MutablePair<>(
+                    structureRegistry.get(Identifier.tryParse("swamp_hut")),
+                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, blockPos2, chunk) -> {
+                        if(structurePiece instanceof ShiftableStructurePiece) {
+                            SwampHutGenerator This = ((SwampHutGenerator)(Object)structurePiece);
+                            ShiftableStructurePieceInvoker shiftableStructurePieceInvoker = ((ShiftableStructurePieceInvoker) This);
+                            shiftableStructurePieceInvoker.invokeAdjustToAverageHeight(worldAccess, chunkBox, 0);
+                        }
+                        return false;
+                    })
+            );
+            structures.add(new MutablePair<>(
+                    structureRegistry.get(Identifier.tryParse("jungle_pyramid")),
+                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, blockPos2, chunk) -> {
+                        if(structurePiece instanceof ShiftableStructurePiece) {
+                            JungleTempleGenerator This = ((JungleTempleGenerator)(Object)structurePiece);
+                            ShiftableStructurePieceInvoker shiftableStructurePieceInvoker = ((ShiftableStructurePieceInvoker) This);
+                            shiftableStructurePieceInvoker.invokeAdjustToAverageHeight(worldAccess, chunkBox, 0);
+                        }
+                        return false;
+                    })
+            );
+            structures.add(new MutablePair<>(
+                    structureRegistry.get(Identifier.tryParse("desert_pyramid")),
+                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, blockPos2, chunk) -> {
+                        if(structurePiece instanceof ShiftableStructurePiece) {
+                            DesertTempleGenerator This = ((DesertTempleGenerator)(Object)structurePiece);
+                            ShiftableStructurePieceInvoker shiftableStructurePieceInvoker = ((ShiftableStructurePieceInvoker) This);
+                            shiftableStructurePieceInvoker.invokeAdjustToMinHeight(worldAccess, -random.nextInt(3));
+                        }
+                        return false;
+                    })
+            );
+            structures.add(new MutablePair<>(
+                    structureRegistry.get(Identifier.tryParse("igloo")),
+                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot, chunk) -> {
+                        SimpleStructurePieceInvoker simplePieceInvoker = ((SimpleStructurePieceInvoker) structurePiece);
+                        IglooGeneratorPieceInvoker iglooGeneratorPieceInvoker = ((IglooGeneratorPieceInvoker) structurePiece);
+                        StructurePieceInvoker pieceInvoker = (StructurePieceInvoker) structurePiece;
+
+
+                        final Identifier TOP_TEMPLATE = new Identifier("igloo/top");
+                        final Identifier MIDDLE_TEMPLATE = new Identifier("igloo/middle");
+                        final Identifier BOTTOM_TEMPLATE = new Identifier("igloo/bottom");
+                        final Map<Identifier, BlockPos> OFFSETS_FROM_TOP = ImmutableMap.of(
+                                TOP_TEMPLATE, BlockPos.ORIGIN, MIDDLE_TEMPLATE, new BlockPos(2, -3, 4), BOTTOM_TEMPLATE, new BlockPos(0, -3, -2)
+                        );
+
+                        Identifier identifier = new Identifier(simplePieceInvoker.getTemplateIdString());
+                        StructurePlacementData structurePlacementData = iglooGeneratorPieceInvoker.invokeCreatePlacementData(simplePieceInvoker.getPlacementData().getRotation(), identifier);
+
+                        BlockPos blockPos = OFFSETS_FROM_TOP.get(identifier);
+                        BlockPos blockPos2 = simplePieceInvoker.getPos().add(StructureTemplate.transform(structurePlacementData, new BlockPos(3 - blockPos.getX(), 0, -blockPos.getZ())));
+
+                        int i = worldAccess.getTopY(Heightmap.Type.WORLD_SURFACE_WG, blockPos2.getX(), blockPos2.getZ());
+                        BlockPos posCache = simplePieceInvoker.getPos();
+
+                        simplePieceInvoker.setPos(simplePieceInvoker.getPos().add(0, i - 90 - 1, 0));
+
+                        simplePieceInvoker.getPlacementData().setBoundingBox(chunkBox);
+                        pieceInvoker.setBoundingBox(simplePieceInvoker.getTemplate().calculateBoundingBox(simplePieceInvoker.getPlacementData(), simplePieceInvoker.getPos()));
+
+                        if (identifier.equals(TOP_TEMPLATE)) {
+                            BlockPos blockPos4 = simplePieceInvoker.getPos().add(StructureTemplate.transform(structurePlacementData, new BlockPos(3, 0, 5)));
+                        }
+
+                        simplePieceInvoker.setPos(posCache);
+
+                        //return true;
+                        return false;
+                    })
+            );
+            //FIX: Some structures don't work. See locations.txt
+            structures.add(new MutablePair<>(
+                    structureRegistry.get(Identifier.tryParse("shipwreck")),
+                    //This is looks different than the original, but all that happened to it is it was restructured and named.
+                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot, chunk) -> {
+                        SimpleStructurePieceInvoker simplePieceInvoker = ((SimpleStructurePieceInvoker) structurePiece);
+                        ShipwreckGeneratorPieceInvoker iglooGeneratorPieceInvoker = ((ShipwreckGeneratorPieceInvoker) structurePiece);
+                        StructurePieceInvoker pieceInvoker = (StructurePieceInvoker) structurePiece;
+
+                        Heightmap.Type heightmap = iglooGeneratorPieceInvoker.getGrounded() ? Heightmap.Type.WORLD_SURFACE_WG : Heightmap.Type.OCEAN_FLOOR_WG;
+
+                        Vec3i size = simplePieceInvoker.getTemplate().getSize();
+                        int area2D = size.getX() * size.getZ();
+                        int YtoMoveTo = 0;
+
+                        //Beached Shipwrecks
+                        if(iglooGeneratorPieceInvoker.getGrounded()) {
+                            //This moves it down to the minium height of the world heightmap.
+                            int minimumHeight = worldAccess.getTopY();
+                            //Run through the 2D locations of the structure and get the average of their heightmaps
+                            BlockPos otherBottomCorner = simplePieceInvoker.getPos().add(size.getX() - 1, 0, size.getZ() - 1);
+                            //Run through the 2D locations of the structure and get the average of their heightmaps
+                            for (BlockPos bottomLayerBlock : BlockPos.iterate(simplePieceInvoker.getPos(), otherBottomCorner)) {
+                                minimumHeight = Math.min(minimumHeight, worldAccess.getTopY(heightmap, bottomLayerBlock.getX(), bottomLayerBlock.getZ()));
+                            }
+                             YtoMoveTo = minimumHeight - size.getY() / 2 - random.nextInt(3);
+
+                        //Normal shipwrecks
+                        } else {
+                            //Basically this just averages all the heights of ocean floor heightmap and puts it there.
+                            int accumulatedHeight = 0;
+                            //Run through the 2D locations of the structure and get the average of their heightmaps
+                            BlockPos otherBottomCorner = simplePieceInvoker.getPos().add(size.getX() - 1, 0, size.getZ() - 1);
+                            //Run through the 2D locations of the structure and get the average of their heightmaps
+                            for (BlockPos bottomLayerBlock : BlockPos.iterate(simplePieceInvoker.getPos(), otherBottomCorner)) {
+                                accumulatedHeight += worldAccess.getTopY(heightmap, bottomLayerBlock.getX(), bottomLayerBlock.getZ());
+                            }
+                            YtoMoveTo = accumulatedHeight / area2D;
+                        }
+
+                        simplePieceInvoker.setPos(new BlockPos(simplePieceInvoker.getPos().getX(), YtoMoveTo, simplePieceInvoker.getPos().getZ()));
+                        //super.generate(world, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot);
+                        simplePieceInvoker.getPlacementData().setBoundingBox(chunkBox);
+                        pieceInvoker.setBoundingBox(simplePieceInvoker.getTemplate().calculateBoundingBox(simplePieceInvoker.getPlacementData(), simplePieceInvoker.getPos()));
+
+                        return false;
+                    })
+            );
+            structures.add(new MutablePair<>(
+                    structureRegistry.get(Identifier.tryParse("shipwreck_beached")),
+                    structures.get(structures.size() - 1).getRight())
+            );
+            structures.add(new MutablePair<>(
+                    structureRegistry.get(Identifier.tryParse("ocean_ruin_cold")),
+                    //This is looks different than the original, but all that happened to it is it was restructured and named.
+                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot, chunk) -> {
+                        SimpleStructurePieceInvoker simplePieceInvoker = ((SimpleStructurePieceInvoker) structurePiece);
+                        OceanRuinGeneratorPieceInvoker oceanRuinGeneratorPieceInvoker = ((OceanRuinGeneratorPieceInvoker) structurePiece);
+                        StructurePieceInvoker pieceInvoker = (StructurePieceInvoker) structurePiece;
+
+                        simplePieceInvoker.getPlacementData()
+                                .clearProcessors()
+                                .addProcessor(new BlockRotStructureProcessor(oceanRuinGeneratorPieceInvoker.getIntegrity()))
+                                .addProcessor(BlockIgnoreStructureProcessor.IGNORE_AIR_AND_STRUCTURE_BLOCKS);
+
+                        int yToMoveTo = 0;
+
+                        int i = worldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, simplePieceInvoker.getPos().getX(), simplePieceInvoker.getPos().getZ());
+                        simplePieceInvoker.setPos(new BlockPos(simplePieceInvoker.getPos().getX(), i, simplePieceInvoker.getPos().getZ()));
+
+                        BlockPos otherCorner = StructureTemplate.transformAround(
+                                        new BlockPos(simplePieceInvoker.getTemplate().getSize().getX() - 1, 0, simplePieceInvoker.getTemplate().getSize().getZ() - 1),
+                                        BlockMirror.NONE,
+                                        simplePieceInvoker.getPlacementData().getRotation(),
+                                        BlockPos.ORIGIN
+                        ).add(simplePieceInvoker.getPos());
+
+                        //yToMoveTo = oceanRuinGeneratorPieceInvoker.method_14829Invoker(simplePieceInvoker.getPos(), worldAccess, otherCorner);
+                        yToMoveTo = oceanRuinYCalculator(simplePieceInvoker.getPos(), worldAccess, otherCorner);
+
+                        simplePieceInvoker.setPos(new BlockPos(simplePieceInvoker.getPos().getX(), yToMoveTo, simplePieceInvoker.getPos().getZ()));
+                        simplePieceInvoker.getPlacementData().setBoundingBox(chunkBox);
+                        pieceInvoker.setBoundingBox(simplePieceInvoker.getTemplate().calculateBoundingBox(simplePieceInvoker.getPlacementData(), simplePieceInvoker.getPos()));
+                        return false;
+                    })
+            );
+            structures.add(new MutablePair<>(
+                    structureRegistry.get(Identifier.tryParse("ocean_ruin_warm")),
+                    structures.get(structures.size() - 1).getRight())
+            );
+            structures.add(new MutablePair<>(
+                    structureRegistry.get(Identifier.tryParse("buried_treasure")),
+                    (structurePiece, worldAccess, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot, chunk) -> {
+                        StructurePieceInvoker pieceInvoker = (StructurePieceInvoker) structurePiece;
+
+                        int i = worldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, pieceInvoker.getBoundingBox().getMinX(), pieceInvoker.getBoundingBox().getMinZ());
+                        BlockPos.Mutable mutable = new BlockPos.Mutable(pieceInvoker.getBoundingBox().getMinX(), i, pieceInvoker.getBoundingBox().getMinZ());
+
+                        while(mutable.getY() > worldAccess.getBottomY()) {
+                            BlockState blockState2 = worldAccess.getBlockState(mutable.down());
+                            if (blockState2 == Blocks.SANDSTONE.getDefaultState()
+                                    || blockState2 == Blocks.STONE.getDefaultState()
+                                    || blockState2 == Blocks.ANDESITE.getDefaultState()
+                                    || blockState2 == Blocks.GRANITE.getDefaultState()
+                                    || blockState2 == Blocks.DIORITE.getDefaultState()) {
+                                break;
+                            }
+
+                            mutable.move(0, -1, 0);
+                        }
+                        pieceInvoker.setBoundingBox(new BlockBox(mutable));
+                        return false;
+                    })
+            );
             
             ran = true;
         }
