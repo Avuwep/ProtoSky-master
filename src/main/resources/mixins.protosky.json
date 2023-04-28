@@ -17,7 +17,8 @@
     "StructureHelperInvokers.StructureStartInvoker",
     "StructureHelperInvokers.OceanRuinGeneratorPieceInvoker",
     "structures.NetherFossilGeneratorPieceMixin",
-    "structures.RuinedPortalStructurePieceMixin"
+    "structures.RuinedPortalStructurePieceMixin",
+    "structures.TreeFeatureMixin"
   ],
   "injectors": {
     "defaultRequire": 1
