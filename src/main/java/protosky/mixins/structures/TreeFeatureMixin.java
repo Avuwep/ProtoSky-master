@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,8 +20,11 @@ import java.util.function.BiConsumer;
 public class TreeFeatureMixin {
     @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
     private void onGenerate(StructureWorldAccess world, Random random, BlockPos pos, BiConsumer<BlockPos, BlockState> rootPlacerReplacer, BiConsumer<BlockPos, BlockState> trunkPlacerReplacer, BiConsumer<BlockPos, BlockState> foliagePlacerReplacer, TreeFeatureConfig config, CallbackInfoReturnable ci) {
-        System.out.println("Trees blocked!");
-        ci.cancel();
+        Chunk chunk = world.getChunk(pos);
+        if (!chunk.isLightOn()) {
+            System.out.println("Trees blocked!");
+            ci.cancel();
+        }
     }
 
 }
