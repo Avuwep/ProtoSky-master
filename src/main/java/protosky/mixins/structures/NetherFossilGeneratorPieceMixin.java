@@ -19,7 +19,7 @@ public abstract class NetherFossilGeneratorPieceMixin {
     //Prevent nether fossils from generating
     @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
     private void onGenerate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci) {
-        System.out.println("Fossils blocked!");
+        //System.out.println("Fossils blocked!");
         ci.cancel();
     }
 }

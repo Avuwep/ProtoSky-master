@@ -19,7 +19,7 @@ public class RuinedPortalStructurePieceMixin {
     //Prevent ruined portals from generating
     @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
     private void onGenerate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci) {
-        System.out.println("Portals blocked!");
+        //System.out.println("Portals blocked!");
         ci.cancel();
     }
 }

@@ -21,8 +21,9 @@ public class TreeFeatureMixin {
     @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
     private void onGenerate(StructureWorldAccess world, Random random, BlockPos pos, BiConsumer<BlockPos, BlockState> rootPlacerReplacer, BiConsumer<BlockPos, BlockState> trunkPlacerReplacer, BiConsumer<BlockPos, BlockState> foliagePlacerReplacer, TreeFeatureConfig config, CallbackInfoReturnable ci) {
         Chunk chunk = world.getChunk(pos);
+        //Only generate trees if the chunks have been generated (Don't generate trees naturally but saplings should grow)
         if (!chunk.isLightOn()) {
-            System.out.println("Trees blocked!");
+            //System.out.println("Trees blocked!");
             ci.cancel();
         }
     }
