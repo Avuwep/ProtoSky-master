@@ -1,6 +1,5 @@
 package protosky.mixins.structures;
 
-import net.minecraft.structure.NetherFossilGenerator;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;

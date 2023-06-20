@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ProtoChunk;
 import net.minecraft.world.gen.feature.EndSpikeFeature;
 
@@ -22,7 +23,7 @@ public class PillarHelper {
     //Copied from stack overflow
     //https://stackoverflow.com/questions/401847/circle-rectangle-collision-detection-intersection
     //This checks if a spike intersects with a chunk properly.
-    private static boolean spikeChunkIntersects(EndSpikeFeature.Spike circle, ProtoChunk rect) {
+    private static boolean spikeChunkIntersects(EndSpikeFeature.Spike circle, Chunk rect) {
         int rectXBlocks = (rect.getPos().x * 16) + 8;
         int rectYBlocks = (rect.getPos().z * 16) + 8;
 
@@ -41,7 +42,7 @@ public class PillarHelper {
         return (cornerDistance_sq <= (circle.getRadius()^2));
     }
 
-    public static void generate(StructureWorldAccess world, ProtoChunk chunk) {
+    public static void generate(StructureWorldAccess world, Chunk chunk) {
         int chunkX = chunk.getPos().x;
         int chunkZ = chunk.getPos().z;
         //-6 Chunks is 96 blocks, all pillars should be within this
@@ -59,7 +60,7 @@ public class PillarHelper {
         LOGGER.info(String.valueOf(i));
     }
 
-    public static void generateSpike(ServerWorldAccess world, EndSpikeFeature.Spike spike, ProtoChunk chunk) {
+    public static void generateSpike(ServerWorldAccess world, EndSpikeFeature.Spike spike, Chunk chunk) {
         int i = spike.getRadius();
         for (BlockPos blockPos : BlockPos.iterate(
                 new BlockPos(spike.getCenterX() - i, 0, spike.getCenterZ() - i),

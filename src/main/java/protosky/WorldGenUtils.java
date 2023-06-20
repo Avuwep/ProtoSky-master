@@ -19,30 +19,41 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.*;
+import net.minecraft.world.chunk.light.LightingProvider;
 import protosky.mixins.ProtoChunkAccessor;
 
 import java.util.Map;
 import java.util.Optional;
 
+import static protosky.ProtoSkySettings.LOGGER;
+
 public class WorldGenUtils
 {
-    public static void deleteBlocks(ProtoChunk chunk, ServerWorld world)
-    {
+    public static void deleteBlocks(Chunk chunk, ServerWorld world) {
+        //This loops through all sections (16x16x16) sections of a chunk and copies over the biome information, but not the blocks.
         ChunkSection[] sections = chunk.getSectionArray();
         for (int i = 0; i < sections.length; i++) {
             ChunkSection chunkSection = sections[i];
             PalettedContainer<BlockState> blockStateContainer = new PalettedContainer<>(Block.STATE_IDS, Blocks.AIR.getDefaultState(), PalettedContainer.PaletteProvider.BLOCK_STATE);
             ReadableContainer<RegistryEntry<Biome>> biomeContainer = chunkSection.getBiomeContainer();
-            int chunkPos = chunkSection.getYOffset() >> 4;
-            sections[i] = new ChunkSection(chunkPos, blockStateContainer, biomeContainer);
+            sections[i] = new ChunkSection(blockStateContainer, biomeContainer);
         }
+
+        //This removes all the block entities
         for (BlockPos bePos : chunk.getBlockEntityPositions()) {
             chunk.removeBlockEntity(bePos);
         }
-        ((ProtoChunkAccessor) chunk).getLightSources().clear();
+
+        //This should clear all the light sources
+        /*ProtoChunk protoChunk = (ProtoChunk) chunk;
+        ProtoChunkAccessor protoChunkAccessor = (ProtoChunkAccessor) protoChunk;
+        LightingProvider lightingProvider = protoChunkAccessor.getLightingProvider();
+        LightingProvider lightingProvider = world.getLightingProvider();
+        lightingProvider.doLightUpdates();
+        chunk.getLightSources().clear();*/
     }
 
-    public static void genHeightMaps(ProtoChunk chunk) {
+    public static void genHeightMaps(Chunk chunk) {
         // defined in Heightmap class constructor
         int elementBits = MathHelper.ceilLog2(chunk.getHeight() + 1);
         long[] emptyHeightmap = new PackedIntegerArray(elementBits, 256).getData();
@@ -56,7 +67,7 @@ public class WorldGenUtils
     public static void clearEntities(ProtoChunk chunk, ServerWorld world) {
         // erase entities
         if (!(world.getRegistryKey() == World.END)) {
-            //chunk.getEntities().clear();
+            chunk.getEntities().clear();
         } else {
             chunk.getEntities().removeIf(tag -> {
                 String id = tag.getString("id");

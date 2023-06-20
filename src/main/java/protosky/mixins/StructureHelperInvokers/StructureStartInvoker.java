@@ -55,5 +55,5 @@ public interface StructureStartInvoker {
     }*/
 
     @Accessor("children")
-    StructurePiecesList getChildren();
+    StructurePiecesList getRealChildren();
 }
